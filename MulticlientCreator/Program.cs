@@ -1,4 +1,4 @@
-﻿using MulticlientCreator.Helpers;
+using MulticlientCreator.Helpers;
 using System;
 using System.IO;
 using System.Text;
@@ -32,6 +32,7 @@ _  /  / / / /_/ /_  / / /_ _  / / /__ _  / _  / /  __/  / / / /_ _/_____/ /___  
             Stream fs = new FileStream(finalPath, FileMode.Open, FileAccess.Read);
             byte[] getFileBytes = DeserializationHelper.ReadFully(fs);
             string getFileString = HexHelper.ToHexString(getFileBytes);
+            string newIpPattern = string.Empty;
 
             if (getFileString.Contains(pattern))
             {
@@ -42,6 +43,7 @@ _  /  / / / /_/ /_  / / /_ _  / / /__ _  / _  / /  __/  / / / /_ _/_____/ /___  
                 string[] split = ip.Split(".");
                 StringBuilder builder = new StringBuilder();
                 var i = 0;
+                builder.Append("0" + Convert.ToString(ip.Length, 16).ToUpper() + "000000");
                 foreach (var str in split)
                 {
                     builder.Append(HexHelper.ToHexString(str));
@@ -52,18 +54,20 @@ _  /  / / / /_/ /_  / / /_ _  / / /__ _  / _  / /  __/  / / / /_ _/_____/ /___  
                     i++;
                 }
 
-                for (var j = builder.ToString().Length; j < 32; j++)
+                for (var j = builder.ToString().Length; j < 40; j++)
                 {
                     builder.Append("0");
                 }
 
-                Console.WriteLine(builder.ToString());
+                newIpPattern = builder.ToString();
             }
 
-            //HexFinder finder = new HexFinder(finalPath, );
+            HexFinder finder = new HexFinder(finalPath, newIpPattern);
+            if (finder.ReplaceIpPattern(pattern))
+            {
+                WriteMessage(ConsoleColor.DarkGreen, "Your multiclient have been successfully generated !");
+            }
 
-            //Console.WriteLine(getFileString);
-            WriteMessage(ConsoleColor.DarkGreen, "Done");
             Console.ReadLine();
         }
 
