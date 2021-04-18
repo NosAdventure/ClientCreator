@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace MulticlientCreator.Helpers
 {
@@ -25,6 +27,11 @@ namespace MulticlientCreator.Helpers
                 c[i * 2 + 1] = (char)(b > 9 ? b + 0x37 : b + 0x30);
             }
             return new string(c);
+        }
+
+        public static string ToHexString(string str)
+        {
+            return string.Concat(str.Select(x => ((int)x).ToString("x")));
         }
     }
 }
