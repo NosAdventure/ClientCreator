@@ -17,7 +17,7 @@ _  /  / / / /_/ /_  / / /_ _  / / /__ _  / _  / /  __/  / / / /_ _/_____/ /___  
 /_/  /_/  \__,_/ /_/  \__/ /_/  \___/ /_/  /_/  \___//_/ /_/\__/        \____/  /_/    \___/\__,_/ \__/ \____//_/     
                                                                                                                       ");
 
-            string officialName = "NosAdventureX.exe";
+            string officialName = "NostaleClientX.exe";
             string pattern = "0C 00 00 00 37 39 2E 31 31 30 2E 38 34 2E 37 35 00 00 00 00".Replace(" ", ""); // maybe a dynamic pattern soon but flemme right now lmfao
 
             boucle:
